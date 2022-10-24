@@ -10,6 +10,7 @@ module.exports = {
     darkMode: false, // or 'media' or 'class'
     theme: {
         screens: {
+            sm   : "360px",
             md   : "768px",
             xl   : "1280px",
             "2xl": "1600px"
@@ -69,9 +70,5 @@ module.exports = {
                 "2xl"  : "10rem"
             }
         }
-    },
-    variants: {
-        extend: {}
-    },
-    plugins: []
+    }
 }
