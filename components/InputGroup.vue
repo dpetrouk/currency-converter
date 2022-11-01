@@ -39,6 +39,10 @@ export default {
     };
   },
   methods: {
+    closeSuggestedList() {
+      this.isOpen = false;
+      this.arrowCounter = -1;
+    },
     onFocus() {
       if (this.items) {
         this.isOpen = true;
@@ -46,7 +50,7 @@ export default {
       }
     },
     onBlur() {
-      setTimeout(() => this.isOpen = false, 150);
+      setTimeout(this.closeSuggestedList, 120);
     },
     onChange(event) {
       this.$emit('input', event.target.value);
@@ -60,25 +64,23 @@ export default {
     },
     filterResults() {
       this.results = this.items
-        .filter((item) => item.toLowerCase().indexOf(this.value.toLowerCase()) > -1);
-    },
-    sliceCurrencyCode(result) {
-      return result.split(' ')[0];
+        .filter((item) => item
+          .toLowerCase()
+          .indexOf(this.value.toLowerCase()) > -1
+        );
     },
     setResult(result) {
-      if (this.type === 'amount') {
-        this.$emit('input', result);
-      } else {
-        const currencyCode = this.sliceCurrencyCode(result);
+      if (this.type === 'currency') {
+        const [currencyCode] = result.split(' ');
         this.$emit('input', currencyCode);
+      } else {
+        this.$emit('input', result);
       }
-      this.isOpen = false;
-      this.arrowCounter = -1;
+      this.closeSuggestedList();
     },
     handleClickOutside(event) {
       if (!this.$el.contains(event.target)) {
-        this.isOpen = false;
-        this.arrowCounter = -1;
+        this.closeSuggestedList();
       }
     },
     onArrowDown() {
@@ -87,7 +89,7 @@ export default {
       } else {
         this.arrowCounter = 0;
       }
-      this.itemView(this.$el.getElementsByClassName('autocomplete-item')[this.arrowCounter])
+      this.scrollToSelectedItem();
     },
     onArrowUp() {
       if (this.arrowCounter > 0) {
@@ -95,14 +97,15 @@ export default {
       } else {
         this.arrowCounter = this.results.length - 1;
       }
-      this.itemView(this.$el.getElementsByClassName('autocomplete-item')[this.arrowCounter])
+      this.scrollToSelectedItem();
     },
     onEnter() {
       this.setResult(this.results[this.arrowCounter]);
     },
-    itemView (item) {
+    scrollToSelectedItem() {
+      const item = this.$el.getElementsByClassName('autocomplete-item')[this.arrowCounter];
       if (item && item.scrollIntoView) {
-        item.scrollIntoView(false)
+        item.scrollIntoView(false);
       }
     }
   },
@@ -117,34 +120,34 @@ export default {
 
 <style lang="scss">
 .label {
-    @apply
-      block
-      leading-4 2xl:leading-5
-      text-14 2xl:text-16
-      font-medium
-      text-text-dark
-    ;
+  @apply
+    block
+    leading-4 2xl:leading-5
+    text-14 2xl:text-16
+    font-medium
+    text-text-dark
+  ;
 }
 
 .input {
-    @apply
-      mt-2
-      py-3 xl:py-4
-      px-4 xl:px-5
-      w-full
-      border rounded
-      border-gainsboro
-      leading-4
-      text-12 2xl:text-14
-    ;
+  @apply
+    mt-2
+    py-3 xl:py-4
+    px-4 xl:px-5
+    w-full
+    border rounded
+    border-gainsboro
+    leading-4
+    text-12 2xl:text-14
+  ;
 }
 .input:focus {
-    @apply
-      outline-none
-      border-primary
-      ring-4 ring-opacity-50
-      ring-secondary
-    ;
+  @apply
+    outline-none
+    border-primary
+    ring-4 ring-opacity-50
+    ring-secondary
+  ;
 }
 
 .autocomplete-results {
@@ -167,9 +170,9 @@ export default {
     text-left
     leading-4
     text-12 2xl:text-14
-    list-none
-    cursor-pointer
     bg-white
+    cursor-pointer
+    list-none
     select-none
   ;
 }

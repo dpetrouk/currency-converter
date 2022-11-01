@@ -21,16 +21,16 @@
           label="Количество"
           placeholder="Введите число"
           type="amount"
-          :items="[1,2,3,5,10,15,20,25,50,100]"
+          :items="[1,2,3,4,5,10,15,20,25,50,100]"
           v-model="amountInInitialCurrency"
           @input="onChange"
         />
       </div>
-      <div class="result-container">
-        <div class="info-icon">
+      <div id="result-container">
+        <div id="info-icon">
           <img src="../assets/images/icon-info-red.svg" />
         </div>
-        <span class="result-text">Итого: {{ amountInFinalCurrency }} {{ codeOfFinalCurrency }}</span>
+        <span id="result-text">Итого: {{ amountInFinalCurrency }} {{ codeOfFinalCurrency }}</span>
       </div>
     </div>
 </template>
@@ -79,7 +79,7 @@ export default {
   ;
 }
 
-.result-container {
+#result-container {
   @apply
     mt-5 xl:mt-6
     p-5 md:p-6 xl:p-7 2xl:p-8
@@ -89,14 +89,14 @@ export default {
   ;
 }
 
-.info-icon {
+#info-icon {
   @apply
     w-10 xl:w-12 2xl:w-13
     select-none
   ;
 }
 
-.result-text {
+#result-text {
   @apply
     inline-block
     ml-5 xl:ml-6 2xl:ml-7
