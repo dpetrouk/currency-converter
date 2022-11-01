@@ -1,8 +1,8 @@
 <template>
-  <div class="card-container">
+  <div :class="$style['card-container']">
       <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor:</h2>
-      <div class="card-body">
-        <div class="card-list">
+      <div :class="$style['card-body']">
+        <div :class="$style['card-list']">
           <ul>
             <li><span>Incididunt ut labore et dolore magna aliqua</span></li>
             <li><span>Incididunt ut labore et</span></li>
@@ -13,11 +13,11 @@
             <li><span>Incididunt ut labore</span></li>
           </ul>
         </div>
-        <div class="card-images">
-          <img class="img-item img-item-1" alt="" src="../assets/images/img-1.jpg"/>
-          <img class="img-item img-item-2" alt="" src="../assets/images/img-2.jpg"/>
-          <img class="img-item img-item-3" alt="" src="../assets/images/img-3.jpg"/>
-          <img class="img-item img-item-4" alt="" src="../assets/images/img-4.jpg"/>
+        <div :class="$style['card-images']">
+          <img :class="{ [$style['img-item']]: true, [$style['img-item-1']]: true }" alt="" src="../assets/images/img-1.jpg"/>
+          <img :class="{ [$style['img-item']]: true, [$style['img-item-2']]: true }" alt="" src="../assets/images/img-2.jpg"/>
+          <img :class="{ [$style['img-item']]: true, [$style['img-item-3']]: true }" alt="" src="../assets/images/img-3.jpg"/>
+          <img :class="{ [$style['img-item']]: true, [$style['img-item-4']]: true }" alt="" src="../assets/images/img-4.jpg"/>
         </div>
       </div>
   </div>
@@ -27,7 +27,7 @@
 export default {}
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .card-container {
   @apply
     self-start

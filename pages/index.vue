@@ -1,7 +1,7 @@
 <template>
     <div>
       <Header text="Валютный калькулятор" />
-      <div class="page-body">
+      <div :class="$style['page-body']">
         <Form />
         <Card/>
       </div>
@@ -13,7 +13,7 @@
 export default {}
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .page-body {
   @apply
     mt-5 xl:mt-8 2xl:mt-9

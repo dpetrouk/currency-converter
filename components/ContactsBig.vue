@@ -1,16 +1,16 @@
 <template>
-  <div class="contacts-container">
-    <div class="contacts-text">
+  <div :class="$style['contacts-container']">
+    <div :class="$style['contacts-text']">
       <h1>Нужна помощь? Мы поможем! Просто свяжитесь с нами.</h1>
       <p>Наши специалисты с радостью ответят на все ваши вопросы и дадут
   профессиональную консультацию по товарам.</p>
     </div>
-    <div class="contacts">
-      <div id="phone">
+    <div :class="$style.contacts">
+      <div :id="$style.phone">
         <a href="tel:88007759028">8 (800) 775-90-28</a>
       </div>
-      <div id="or">или</div>
-      <div id="email">
+      <div :id="$style.or">или</div>
+      <div :id="$style.email">
         <a href="mailto:info@example.ru">info@example.ru</a>
       </div>
     </div>
@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .contacts-container {
   @apply
     mt-5 md:mt-6 xl:mt-10

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <label class="label">{{ label }}</label>
+    <label :class="$style.label">{{ label }}</label>
     <input
       type="text"
-      class="input"
+      :class="$style.input"
       :placeholder="placeholder"
       :value="value"
       @input="onChange($event)"
@@ -13,14 +13,16 @@
     />
     <ul
       v-show="isOpen"
-      class="autocomplete-results"
+      :class="$style['autocomplete-results']"
     >
       <li
         v-for="(result, i) in results"
         :key="i"
         @click="setResult(result)"
-        class="autocomplete-item"
-        :class="{ 'is-active': i === arrowCounter }"
+        :class="{
+          [$style['autocomplete-item']]: true,
+          [$style['is-active']]: i === arrowCounter
+        }"
       >
         {{ result }}
       </li>
@@ -118,7 +120,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .label {
   @apply
     block

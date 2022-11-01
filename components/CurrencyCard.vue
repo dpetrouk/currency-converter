@@ -1,20 +1,20 @@
 <template>
-  <div class="currency-card">
+  <div :class="$style['currency-card']">
     <div>
       <img
         v-if="isOrderEven()"
         src="../assets/images/icon-money-blue.svg"
-        class="money-sign"
+        :class="$style['money-sign']"
       />
       <img
         v-else
         src="../assets/images/icon-money-red.svg"
-        class="money-sign"
+        :class="$style['money-sign']"
       />
-      <h2 class="currency-code" >{{ currency.CharCode }}</h2>
-      <p class="currency-name">{{ currency.Name }}</p>
+      <h2 :class="$style['currency-code']" >{{ currency.CharCode }}</h2>
+      <p :class="$style['currency-name']">{{ currency.Name }}</p>
     </div>
-    <ul class="currency-info">
+    <ul :class="$style['currency-info']">
       <li>Номинал: {{ currency.Nominal }}</li>
       <li>Курс: {{ currency.Value }}</li>
     </ul>
@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .currency-card {
   @apply
     p-5 xl:p-6 2xl:p-8

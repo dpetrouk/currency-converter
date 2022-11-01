@@ -1,5 +1,5 @@
 <template>
-  <ul class="currency-cards">
+  <ul :class="$style['currency-cards']">
     <CurrencyCard
       v-for="(currency, i) in firstThreeCurrencies"
       :key="i"
@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .currency-cards {
   @apply
     mt-5 xl:mt-20 2xl:mt-9

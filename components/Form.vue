@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="input-groups">
+      <div :class="$style['input-groups']">
         <InputGroup
           label="Валюта 1"
           placeholder="Введите название или код"
@@ -26,11 +26,9 @@
           @input="onChange"
         />
       </div>
-      <div id="result-container">
-        <div id="info-icon">
-          <img src="../assets/images/icon-info-red.svg" />
-        </div>
-        <span id="result-text">Итого: {{ amountInFinalCurrency }} {{ codeOfFinalCurrency }}</span>
+      <div :id="$style['result-container']">
+        <img :id="$style['info-icon']" src="../assets/images/icon-info-red.svg" />
+        <span :id="$style['result-text']">Итого: {{ amountInFinalCurrency }} {{ codeOfFinalCurrency }}</span>
       </div>
     </div>
 </template>
@@ -71,7 +69,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" module>
 .input-groups {
   @apply
     grid grid-cols-1 grid-rows-3
