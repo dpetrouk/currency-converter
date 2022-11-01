@@ -19,9 +19,9 @@
 <script>
 import { mapActions } from 'vuex';
 export default {
-  methods: mapActions(['getCurrenciesData']),
+  methods: mapActions(['fetchCurrenciesData']),
   async mounted() {
-    this.getCurrenciesData();
+    this.fetchCurrenciesData();
   }
 }
 </script>

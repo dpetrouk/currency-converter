@@ -1,6 +1,6 @@
 export const state = () => ({
   currencies: {}
-})
+});
 
 export const getters = {
   getCurrencyValue: (state) => (currencyCode) => {
@@ -21,17 +21,17 @@ export const getters = {
       .filter((currency, i) => i < 3);
     return result;
   }
-}
+};
 
 export const mutations = {
   updateCurrencies(state, currencies) {
     state.currencies = currencies;
   },
-}
+};
 
 export const actions = {
-  async getCurrenciesData({ commit }) {
+  async fetchCurrenciesData({ commit }) {
     const { Valute } = await this.$axios.$get('https://www.cbr-xml-daily.ru/daily_json.js');
     commit('updateCurrencies', Valute);
   }
-}
+};
