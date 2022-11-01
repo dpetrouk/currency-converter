@@ -29,9 +29,17 @@ export const mutations = {
   },
 };
 
+const proxify = (feed) => {
+  const proxy = new URL('https://allorigins.hexlet.app/raw?disableCache=true&url=');
+  proxy.searchParams.set('url', feed);
+  return proxy.toString();
+};
+
 export const actions = {
   async fetchCurrenciesData({ commit }) {
-    const { Valute } = await this.$axios.$get('https://www.cbr-xml-daily.ru/daily_json.js');
+    const link = 'https://www.cbr-xml-daily.ru/daily_json.js';
+    const proxifiedLink = proxify(link);
+    const { Valute } = await this.$axios.$get(proxifiedLink);
     commit('updateCurrencies', Valute);
   }
 };
