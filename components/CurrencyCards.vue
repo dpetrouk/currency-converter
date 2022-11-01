@@ -1,7 +1,5 @@
 <template>
-  <ul
-    class="currencies-list"
-  >
+  <ul class="currency-cards">
     <CurrencyCard
       v-for="(currency, i) in firstThreeCurrencies"
       :key="i"
@@ -21,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss">
-.currencies-list {
+.currency-cards {
   @apply
     mt-5 xl:mt-20 2xl:mt-9
     grid
