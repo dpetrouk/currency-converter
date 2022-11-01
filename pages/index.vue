@@ -5,7 +5,7 @@
         <Form />
         <Card/>
       </div>
-      <Contacts />
+      <ContactsBig />
     </div>
 </template>
 
