@@ -17,7 +17,13 @@
 </template>
 
 <script>
-export default {}
+import { mapActions } from 'vuex';
+export default {
+  methods: mapActions(['getCurrenciesData']),
+  async mounted() {
+    this.getCurrenciesData();
+  }
+}
 </script>
 
 <style lang="scss">

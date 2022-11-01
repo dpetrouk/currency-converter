@@ -4,28 +4,70 @@
         <InputGroup
           label="Валюта 1"
           placeholder="Введите название или код"
+          type="currency"
+          :items="currenciesCodesAndNames"
+          v-model="codeOfInitialCurrency"
+          @input="onChange"
         />
         <InputGroup
           label="Валюта 2"
           placeholder="Введите название или код"
+          type="currency"
+          :items="currenciesCodesAndNames"
+          v-model="codeOfFinalCurrency"
+          @input="onChange"
         />
         <InputGroup
           label="Количество"
           placeholder="Введите число"
+          type="amount"
+          :items="[1,2,3,5,10,15,20,25,50,100]"
+          v-model="amountInInitialCurrency"
+          @input="onChange"
         />
       </div>
       <div class="result-container">
         <div class="info-icon">
           <img src="../assets/images/icon-info-red.svg" />
         </div>
-        <span class="result-text">Итого: 1234</span>
+        <span class="result-text">Итого: {{ amountInFinalCurrency }} {{ codeOfFinalCurrency }}</span>
       </div>
     </div>
 </template>
 
 <script>
-export default {
+import { mapGetters } from 'vuex';
 
+export default {
+  data() {
+    return {
+      codeOfInitialCurrency: '',
+      codeOfFinalCurrency: '',
+      amountInInitialCurrency: '',
+      amountInFinalCurrency: '',
+    };
+  },
+  computed: {
+    ...mapGetters(['currenciesCodesAndNames'])
+  },
+  methods: {
+    getCurrencyValue(currencyCode) {
+      return this.$store.getters.getCurrencyValue(currencyCode);
+    },
+    roundUpToTwoDecimals(value) {
+      return Math.round(value * 100) / 100;
+    },
+    onChange() {
+      const valueOfInitialCurrencyInRUB = this.getCurrencyValue(this.codeOfInitialCurrency);
+      const valueOfFinalCurrencyInRUB = this.getCurrencyValue(this.codeOfFinalCurrency);
+
+      const amountOfInitialCurrencyInRUB = valueOfInitialCurrencyInRUB * this.amountInInitialCurrency;
+
+      const amountInFinalCurrency = this.roundUpToTwoDecimals(amountOfInitialCurrencyInRUB / valueOfFinalCurrencyInRUB);
+
+      this.amountInFinalCurrency = amountInFinalCurrency || '';
+    }
+  }
 }
 </script>
 
