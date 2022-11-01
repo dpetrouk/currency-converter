@@ -7,10 +7,12 @@
     </div>
     <div class="contacts">
       <div id="phone">
-        8 (800) 775-90-28
+        <a href="tel:88007759028">8 (800) 775-90-28</a>
       </div>
       <div id="or">или</div>
-      <div id="email">info@example.ru</div>
+      <div id="email">
+        <a href="mailto:info@example.ru">info@example.ru</a>
+      </div>
     </div>
   </div>
 </template>
