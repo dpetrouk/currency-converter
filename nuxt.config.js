@@ -1,5 +1,11 @@
 export default
 {
+  target: "static",
+
+  router: {
+    base: '/currency-converter'
+  },
+
   components: true,
 
   buildModules:
