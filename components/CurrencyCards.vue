@@ -3,9 +3,9 @@
     class="currencies-list"
   >
     <CurrencyCard
-      v-for="(currencyItem, i) in firstThreeCurrencies"
+      v-for="(currency, i) in firstThreeCurrencies"
       :key="i"
-      :currency-item="currencyItem"
+      :currency="currency"
       :id="i"
     />
   </ul>

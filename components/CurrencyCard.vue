@@ -11,19 +11,19 @@
         src="../assets/images/icon-money-red.svg"
         class="money-sign"
       />
-      <h2 class="currency-code" >{{ currencyItem.CharCode }}</h2>
-      <p class="currency-name">{{ currencyItem.Name }}</p>
+      <h2 class="currency-code" >{{ currency.CharCode }}</h2>
+      <p class="currency-name">{{ currency.Name }}</p>
     </div>
     <ul class="currency-info">
-      <li>Номинал: {{ currencyItem.Nominal }}</li>
-      <li>Курс: {{ currencyItem.Value }}</li>
+      <li>Номинал: {{ currency.Nominal }}</li>
+      <li>Курс: {{ currency.Value }}</li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['currencyItem', 'id'],
+  props: ['currency', 'id'],
   methods: {
     isOrderEven() {
       return this.id % 2 === 0;
