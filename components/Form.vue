@@ -16,7 +16,7 @@
       </div>
       <div class="result-container">
         <div class="info-icon">
-          <img src="../assets/images/info-sign-red.svg" />
+          <img src="../assets/images/icon-info-red.svg" />
         </div>
         <span class="result-text">Итого: 1234</span>
       </div>
