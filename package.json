@@ -2,6 +2,7 @@
   "name": "currency-converter",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://dpetrouk.github.io/currency-converter/",
   "scripts": {
     "dev": "nuxt",
     "dev:mobile": "nuxt -H 0.0.0.0",
