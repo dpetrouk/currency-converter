@@ -40,7 +40,12 @@ const proxify = (feed) => {
 };
 
 export const actions = {
+  // async nuxtServerInit ({ commit }) {
+  //   const { Valute } = await this.$axios.$get('https://www.cbr-xml-daily.ru/daily_json.js');
+  //   commit('updateCurrencies', Valute);
+  // }
   async fetchCurrenciesData({ commit }) {
+    // If nuxt.config.js target is static (which is required for github-pages deployment)
     const link = 'https://www.cbr-xml-daily.ru/daily_json.js';
     const proxifiedLink = proxify(link);
     const { Valute } = await this.$axios.$get(proxifiedLink);
