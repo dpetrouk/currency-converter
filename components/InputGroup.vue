@@ -103,7 +103,7 @@ export default {
       this.setResult(this.results[this.arrowCounter]);
     },
     scrollToSelectedItem() {
-      const item = this.$el.getElementsByClassName('autocomplete-item')[this.arrowCounter];
+      const item = this.$el.getElementsByTagName('li')[this.arrowCounter];
       if (item && item.scrollIntoView) {
         item.scrollIntoView(false);
       }
