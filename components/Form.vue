@@ -6,6 +6,7 @@
           placeholder="Введите название или код"
           type="currency"
           :items="currenciesCodesAndNames"
+          :codes="currenciesCodes"
           v-model="codeOfInitialCurrency"
           @input="onChange"
         />
@@ -14,6 +15,7 @@
           placeholder="Введите название или код"
           type="currency"
           :items="currenciesCodesAndNames"
+          :codes="currenciesCodes"
           v-model="codeOfFinalCurrency"
           @input="onChange"
         />
@@ -46,7 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['currenciesCodesAndNames'])
+    ...mapGetters(['currenciesCodesAndNames', 'currenciesCodes'])
   },
   methods: {
     getValueOfCurrencyInRUB(currencyCode) {

@@ -18,7 +18,7 @@
       <li
         v-for="(result, i) in results"
         :key="i"
-        @click="setResult(result)"
+        @click="setResult(result, i)"
         :class="{
           [$style['autocomplete-item']]: true,
           [$style['is-active']]: i === arrowCounter
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  props: ['value', 'items', 'label', 'placeholder', 'type'],
+  props: ['value', 'items', 'codes', 'label', 'placeholder', 'type'],
   data() {
     return {
       results: [],
@@ -71,9 +71,9 @@ export default {
           .indexOf(this.value.toLowerCase()) > -1
         );
     },
-    setResult(result) {
+    setResult(result, i) {
       if (this.type === 'currency') {
-        const [currencyCode] = result.split(' ');
+        const currencyCode = this.codes[i];
         this.$emit('input', currencyCode);
       } else {
         this.$emit('input', result);
