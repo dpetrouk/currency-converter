@@ -3,20 +3,24 @@ export const state = () => ({
 });
 
 export const getters = {
-  getCurrencyValue: (state) => (currencyCode) => {
+  getValueOfCurrencyInRUB: (state) => (currencyCode) => {
     const currency = state.currencies[currencyCode];
     if (!currency) {
       return;
     }
-    return currency.Value;
+    const valueOfCurrencyInRUB = currency.Value / currency.Nominal;
+    return valueOfCurrencyInRUB;
   },
-  currenciesCodesAndNames(state) {
+  currenciesCodes(state) {
     const codes = Object.keys(state.currencies);
-    const codeAndNameStrings = codes.map((code) => `${code} - ${state.currencies[code].Name}`);
+    return codes;
+  },
+  currenciesCodesAndNames(state, getters) {
+    const codeAndNameStrings = getters.currenciesCodes.map((code) => `${code} - ${state.currencies[code].Name}`);
     return codeAndNameStrings;
   },
-  firstThreeCurrencies(state) {
-    const result = Object.keys(state.currencies)
+  firstThreeCurrencies(state, getters) {
+    const result = getters.currenciesCodes
       .map((code) => state.currencies[code])
       .filter((currency, i) => i < 3);
     return result;

@@ -49,15 +49,15 @@ export default {
     ...mapGetters(['currenciesCodesAndNames'])
   },
   methods: {
-    getCurrencyValue(currencyCode) {
-      return this.$store.getters.getCurrencyValue(currencyCode);
+    getValueOfCurrencyInRUB(currencyCode) {
+      return this.$store.getters.getValueOfCurrencyInRUB(currencyCode);
     },
     roundUpToTwoDecimals(value) {
       return Math.round(value * 100) / 100;
     },
     onChange() {
-      const valueOfInitialCurrencyInRUB = this.getCurrencyValue(this.codeOfInitialCurrency);
-      const valueOfFinalCurrencyInRUB = this.getCurrencyValue(this.codeOfFinalCurrency);
+      const valueOfInitialCurrencyInRUB = this.getValueOfCurrencyInRUB(this.codeOfInitialCurrency);
+      const valueOfFinalCurrencyInRUB = this.getValueOfCurrencyInRUB(this.codeOfFinalCurrency);
 
       const amountOfInitialCurrencyInRUB = valueOfInitialCurrencyInRUB * this.amountInInitialCurrency;
 
