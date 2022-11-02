@@ -6,10 +6,11 @@
       :class="$style.input"
       :placeholder="placeholder"
       :value="value"
-      @input="onChange($event)"
-      @focus="onFocus" @blur="onBlur"
+      @input="onChange($event.target.value)"
+      @focus="onFocus"
       @keydown.down="onArrowDown" @keydown.up="onArrowUp"
       @keydown.enter="onEnter"
+      @keydown.tab="closeSuggestedList"
     />
     <ul
       v-show="isOpen"
@@ -51,11 +52,8 @@ export default {
         this.results = this.items;
       }
     },
-    onBlur() {
-      setTimeout(this.closeSuggestedList, 120);
-    },
-    onChange(event) {
-      this.$emit('input', event.target.value);
+    onChange(value) {
+      this.$emit('input', value);
 
       if (this.items) {
         if (this.type === 'currency') {
