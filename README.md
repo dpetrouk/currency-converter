@@ -12,7 +12,7 @@
 
 ### Demo:
 
-dpetrouk.github.io/currency-converter/
+https://dpetrouk.github.io/currency-converter/
 
 ### Install and run:
 
