@@ -100,7 +100,7 @@ export default {
       this.scrollToSelectedItem();
     },
     onEnter() {
-      this.setResult(this.results[this.arrowCounter]);
+      this.setResult(this.results[this.arrowCounter], this.arrowCounter);
     },
     scrollToSelectedItem() {
       const item = this.$el.getElementsByTagName('li')[this.arrowCounter];
