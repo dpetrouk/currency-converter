@@ -4,7 +4,6 @@
         <InputGroup
           label="Валюта 1"
           placeholder="Введите название или код"
-          type="currency"
           :options="currenciesCodesAndNames"
           v-model="nameOfInitialCurrency"
           @input="onChange"
@@ -12,7 +11,6 @@
         <InputGroup
           label="Валюта 2"
           placeholder="Введите название или код"
-          type="currency"
           :options="currenciesCodesAndNames"
           v-model="nameOfFinalCurrency"
           @input="onChange"
@@ -20,7 +18,6 @@
         <InputGroup
           label="Количество"
           placeholder="Введите число"
-          type="amount"
           :options="amountOptions"
           v-model="amountInInitialCurrency"
           @input="onChange"

@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  props: ['value', 'type', 'options', 'label', 'placeholder'],
+  props: ['value', 'options', 'label', 'placeholder'],
   data() {
     return {
       suggestedList: [],
@@ -56,20 +56,13 @@ export default {
     onChange(value) {
       this.$emit('input', value);
 
-      if (this.options) {
-        if (this.type === 'currency') {
-          this.filterOptions();
-        }
-        this.isOpen = true;
-      }
+      this.filterOptions(value);
+      this.isOpen = true;
     },
-    filterOptions() {
-      const valueToSearch = (this.value ?? '').toLowerCase();
+    filterOptions(value) {
+      const valueToSearch = value ? String(value).toLowerCase() : '';
       this.suggestedList = this.options
-        .filter((item) => item
-          .toLowerCase()
-          .indexOf(valueToSearch) > -1
-        );
+        .filter((item) => String(item).toLowerCase().indexOf(valueToSearch) > -1);
     },
     setResult(selectedItem) {
       this.$emit('input', selectedItem);
