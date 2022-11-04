@@ -11,12 +11,12 @@
         src="../assets/images/icon-money-red.svg"
         :class="$style['money-sign']"
       />
-      <h2 :class="$style['currency-code']" >{{ currency.CharCode }}</h2>
-      <p :class="$style['currency-name']">{{ currency.Name }}</p>
+      <h2 :class="$style['currency-code']" >{{ currency.charCode }}</h2>
+      <p :class="$style['currency-name']">{{ currency.name }}</p>
     </div>
     <ul :class="$style['currency-info']">
-      <li>Номинал: {{ currency.Nominal }}</li>
-      <li>Курс: {{ currency.Value }}</li>
+      <li>Номинал: {{ currency.nominal }}</li>
+      <li>Курс: {{ currency.value }}</li>
     </ul>
   </div>
 </template>
