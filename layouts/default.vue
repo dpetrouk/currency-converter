@@ -20,7 +20,7 @@
 import { mapActions } from 'vuex';
 export default {
   methods: mapActions(['fetchCurrenciesData']),
-  async mounted() {
+  created () {
     this.fetchCurrenciesData();
   }
 }
