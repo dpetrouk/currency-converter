@@ -6,10 +6,11 @@
       :class="$style.input"
       :placeholder="placeholder"
       :value="value"
+      ref="input"
       @input="onChange($event.target.value)"
       @focus="onFocus"
       @keydown.down="onArrowDown" @keydown.up="onArrowUp"
-      @keydown.enter="onEnter($event)"
+      @keydown.enter="onEnter"
       @keydown.tab="closeSuggestedList"
     />
     <ul
@@ -103,12 +104,12 @@ export default {
     hasListItemSelected() {
       return this.arrowCounter >= 0;
     },
-    onEnter(event) {
+    onEnter() {
       if (this.hasListItemSelected()) {
         this.setResult(this.results[this.arrowCounter], this.arrowCounter);
       } else {
         this.closeSuggestedList();
-        this.focusNext(event);
+        this.focusNext();
       }
     },
     scrollToSelectedItem() {
@@ -117,10 +118,13 @@ export default {
         item.scrollIntoView(false);
       }
     },
-    focusNext(event) {
-      const nextElement = event.target.parentElement.nextElementSibling;
+    focusNext() {
+      const currentElement = this.$refs.input;
+      const nextElement = currentElement.parentElement.nextElementSibling;
       if (nextElement) {
         nextElement.querySelector('input').focus();
+      } else {
+        currentElement.blur();
       }
     }
   },
