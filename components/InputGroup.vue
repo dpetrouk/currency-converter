@@ -18,15 +18,15 @@
       :class="$style['autocomplete-results']"
     >
       <li
-        v-for="(result, i) in results"
+        v-for="(suggestedItem, i) in suggestedList"
         :key="i"
-        @click="setResult(result, i)"
+        @click="setResult(suggestedItem, i)"
         :class="{
           [$style['autocomplete-item']]: true,
           [$style['is-active']]: i === arrowCounter
         }"
       >
-        {{ result }}
+        {{ suggestedItem }}
       </li>
     </ul>
   </div>
@@ -34,10 +34,10 @@
 
 <script>
 export default {
-  props: ['value', 'items', 'codes', 'label', 'placeholder', 'type'],
+  props: ['value', 'type', 'options', 'codes', 'label', 'placeholder'],
   data() {
     return {
-      results: [],
+      suggestedList: [],
       isOpen: false,
       arrowCounter: -1,
     };
@@ -48,35 +48,36 @@ export default {
       this.arrowCounter = -1;
     },
     onFocus() {
-      if (this.items) {
+      if (this.options) {
         this.isOpen = true;
-        this.results = this.items;
+        this.suggestedList = this.options;
       }
     },
     onChange(value) {
       this.$emit('input', value);
 
-      if (this.items) {
+      if (this.options) {
         if (this.type === 'currency') {
-          this.filterResults();
+          this.filterOptions();
         }
         this.isOpen = true;
       }
     },
-    filterResults() {
+    filterOptions() {
       const valueToSearch = (this.value ?? '').toLowerCase();
-      this.results = this.items
+      this.suggestedList = this.options
         .filter((item) => item
           .toLowerCase()
           .indexOf(valueToSearch) > -1
         );
     },
-    setResult(result, i) {
+    setResult(suggestedItem, i) {
       if (this.type === 'currency') {
         const currencyCode = this.codes[i];
+        console.log(currencyCode);
         this.$emit('input', currencyCode);
       } else {
-        this.$emit('input', result);
+        this.$emit('input', suggestedItem);
       }
       this.closeSuggestedList();
     },
@@ -86,7 +87,7 @@ export default {
       }
     },
     onArrowDown() {
-      if (this.arrowCounter < this.results.length - 1) {
+      if (this.arrowCounter < this.suggestedList.length - 1) {
         this.arrowCounter = this.arrowCounter + 1;
       } else {
         this.arrowCounter = 0;
@@ -97,7 +98,7 @@ export default {
       if (this.arrowCounter > 0) {
         this.arrowCounter = this.arrowCounter - 1;
       } else {
-        this.arrowCounter = this.results.length - 1;
+        this.arrowCounter = this.suggestedList.length - 1;
       }
       this.scrollToSelectedItem();
     },
@@ -106,7 +107,7 @@ export default {
     },
     onEnter() {
       if (this.hasListItemSelected()) {
-        this.setResult(this.results[this.arrowCounter], this.arrowCounter);
+        this.setResult(this.suggestedList[this.arrowCounter], this.arrowCounter);
       } else {
         this.closeSuggestedList();
         this.focusNext();
