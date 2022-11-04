@@ -20,7 +20,7 @@
       <li
         v-for="(suggestedItem, i) in suggestedList"
         :key="i"
-        @click="setResult(suggestedItem, i)"
+        @click="setResult(suggestedItem)"
         :class="{
           [$style['autocomplete-item']]: true,
           [$style['is-active']]: i === arrowCounter
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  props: ['value', 'type', 'options', 'codes', 'label', 'placeholder'],
+  props: ['value', 'type', 'options', 'label', 'placeholder'],
   data() {
     return {
       suggestedList: [],
@@ -71,14 +71,8 @@ export default {
           .indexOf(valueToSearch) > -1
         );
     },
-    setResult(suggestedItem, i) {
-      if (this.type === 'currency') {
-        const currencyCode = this.codes[i];
-        console.log(currencyCode);
-        this.$emit('input', currencyCode);
-      } else {
-        this.$emit('input', suggestedItem);
-      }
+    setResult(selectedItem) {
+      this.$emit('input', selectedItem);
       this.closeSuggestedList();
     },
     handleClickOutside(event) {
@@ -107,7 +101,7 @@ export default {
     },
     onEnter() {
       if (this.hasListItemSelected()) {
-        this.setResult(this.suggestedList[this.arrowCounter], this.arrowCounter);
+        this.setResult(this.suggestedList[this.arrowCounter]);
       } else {
         this.closeSuggestedList();
         this.focusNext();

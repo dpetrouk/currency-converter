@@ -6,8 +6,7 @@
           placeholder="Введите название или код"
           type="currency"
           :options="currenciesCodesAndNames"
-          :codes="currenciesCodes"
-          v-model="codeOfInitialCurrency"
+          v-model="nameOfInitialCurrency"
           @input="onChange"
         />
         <InputGroup
@@ -15,8 +14,7 @@
           placeholder="Введите название или код"
           type="currency"
           :options="currenciesCodesAndNames"
-          :codes="currenciesCodes"
-          v-model="codeOfFinalCurrency"
+          v-model="nameOfFinalCurrency"
           @input="onChange"
         />
         <InputGroup
@@ -43,15 +41,21 @@ import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      codeOfInitialCurrency: '',
-      codeOfFinalCurrency: '',
+      nameOfInitialCurrency: '',
+      nameOfFinalCurrency: '',
       amountInInitialCurrency: '',
       amountInFinalCurrency: '',
       amountOptions: [100,50,25,10,5,1]
     };
   },
   computed: {
-    ...mapGetters(['currenciesCodesAndNames', 'currenciesCodes']),
+    ...mapGetters(['currenciesCodesAndNames']),
+    codeOfInitialCurrency() {
+      return this.getCurrencyCodeFromMixedString(this.nameOfInitialCurrency);
+    },
+    codeOfFinalCurrency() {
+      return this.getCurrencyCodeFromMixedString(this.nameOfFinalCurrency);
+    },
     areFieldsEmpty() {
       const isField1Empty = this.codeOfInitialCurrency.length === 0;
       const isField2Empty = this.codeOfFinalCurrency.length === 0;
@@ -68,6 +72,9 @@ export default {
     }
   },
   methods: {
+    getCurrencyCodeFromMixedString(currencyCodeAndName) {
+      return currencyCodeAndName.split(' -')[0];
+    },
     getValueOfCurrencyInRUB(currencyCode) {
       return this.$store.getters.getValueOfCurrencyInRUB(currencyCode);
     },
