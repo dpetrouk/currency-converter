@@ -53,13 +53,13 @@ export default {
   computed: {
     ...mapGetters(['currenciesCodesAndNames', 'currenciesCodes']),
     areFieldsEmpty() {
-      const isField1Empty = this.codeOfInitialCurrency.length > 0;
-      const isField2Empty = this.codeOfFinalCurrency.length > 0;
-      const isAmountEmpty = this.amountInInitialCurrency.length > 0;
-      return isField1Empty && isField2Empty && isAmountEmpty;
+      const isField1Empty = this.codeOfInitialCurrency.length === 0;
+      const isField2Empty = this.codeOfFinalCurrency.length === 0;
+      const isAmountEmpty = this.amountInInitialCurrency.length === 0;
+      return isField1Empty || isField2Empty || isAmountEmpty;
     },
     result() {
-      if (this.areFieldsEmpty) {
+      if (!this.areFieldsEmpty) {
         const initialCurrency = `${this.amountInInitialCurrency} ${this.codeOfInitialCurrency}`;
         const finalCurrency = `${this.amountInFinalCurrency} ${this.codeOfFinalCurrency}`;
         return `${initialCurrency} = ${finalCurrency}`;
