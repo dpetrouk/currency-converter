@@ -9,7 +9,7 @@
       @input="onChange($event.target.value)"
       @focus="onFocus"
       @keydown.down="onArrowDown" @keydown.up="onArrowUp"
-      @keydown.enter="onEnter"
+      @keydown.enter="onEnter($event)"
       @keydown.tab="closeSuggestedList"
     />
     <ul
@@ -100,13 +100,27 @@ export default {
       }
       this.scrollToSelectedItem();
     },
-    onEnter() {
-      this.setResult(this.results[this.arrowCounter], this.arrowCounter);
+    hasListItemSelected() {
+      return this.arrowCounter >= 0;
+    },
+    onEnter(event) {
+      if (this.hasListItemSelected()) {
+        this.setResult(this.results[this.arrowCounter], this.arrowCounter);
+      } else {
+        this.closeSuggestedList();
+        this.focusNext(event);
+      }
     },
     scrollToSelectedItem() {
       const item = this.$el.getElementsByTagName('li')[this.arrowCounter];
       if (item && item.scrollIntoView) {
         item.scrollIntoView(false);
+      }
+    },
+    focusNext(event) {
+      const nextElement = event.target.parentElement.nextElementSibling;
+      if (nextElement) {
+        nextElement.querySelector('input').focus();
       }
     }
   },
