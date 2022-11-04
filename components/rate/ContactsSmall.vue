@@ -1,6 +1,6 @@
 <template>
   <div :class="$style['contacts-small']">
-    <img :id="$style['icon-info']" src="../assets/images/icon-info-blue.svg" />
+    <img :id="$style['icon-info']" src="~/assets/images/icon-info-blue.svg" />
     <div :id="$style.contacts">
       Телефон: <a href="tel:88007759028">8 (800) 775-90-28</a>, email: <a href="mailto:info@example.ru">info@example.ru</a>.
     </div>

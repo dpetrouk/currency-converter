@@ -3,12 +3,12 @@
     <div>
       <img
         v-if="isOrderEven()"
-        src="../assets/images/icon-money-blue.svg"
+        src="~/assets/images/icon-money-blue.svg"
         :class="$style['money-sign']"
       />
       <img
         v-else
-        src="../assets/images/icon-money-red.svg"
+        src="~/assets/images/icon-money-red.svg"
         :class="$style['money-sign']"
       />
       <h2 :class="$style['currency-code']" >{{ currency.charCode }}</h2>
@@ -85,7 +85,7 @@ export default {
       pl-6
       bg-10
     ;
-    background: url("../assets/images/list-bullet-circle-red.svg") no-repeat left center;
+    background: url("~/assets/images/list-bullet-circle-red.svg") no-repeat left center;
   }
 }
 </style>

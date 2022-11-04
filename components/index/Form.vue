@@ -24,7 +24,7 @@
         />
       </div>
       <div :id="$style['result-container']">
-        <img :id="$style['info-icon']" src="../assets/images/icon-info-red.svg" />
+        <img :id="$style['info-icon']" src="~/assets/images/icon-info-red.svg" />
         <span :id="$style['result-text']">
           Итого: {{ result }}
         </span>

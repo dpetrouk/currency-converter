@@ -14,10 +14,10 @@
           </ul>
         </div>
         <div :class="$style['card-images']">
-          <img :class="{ [$style['img-item']]: true, [$style['img-item-1']]: true }" alt="" src="../assets/images/img-1.jpg"/>
-          <img :class="{ [$style['img-item']]: true, [$style['img-item-2']]: true }" alt="" src="../assets/images/img-2.jpg"/>
-          <img :class="{ [$style['img-item']]: true, [$style['img-item-3']]: true }" alt="" src="../assets/images/img-3.jpg"/>
-          <img :class="{ [$style['img-item']]: true, [$style['img-item-4']]: true }" alt="" src="../assets/images/img-4.jpg"/>
+          <img :class="{ [$style['img-item']]: true, [$style['img-item-1']]: true }" alt="" src="~/assets/images/img-1.jpg"/>
+          <img :class="{ [$style['img-item']]: true, [$style['img-item-2']]: true }" alt="" src="~/assets/images/img-2.jpg"/>
+          <img :class="{ [$style['img-item']]: true, [$style['img-item-3']]: true }" alt="" src="~/assets/images/img-3.jpg"/>
+          <img :class="{ [$style['img-item']]: true, [$style['img-item-4']]: true }" alt="" src="~/assets/images/img-4.jpg"/>
         </div>
       </div>
   </div>
@@ -72,7 +72,7 @@ export default {}
       font-normal
       text-text-main
     ;
-    background: url("../assets/images/list-bullet-circle-red.svg") no-repeat left center;
+    background: url("~/assets/images/list-bullet-circle-red.svg") no-repeat left center;
   }
 }
 

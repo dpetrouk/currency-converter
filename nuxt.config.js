@@ -6,7 +6,12 @@ export default
     base: '/currency-converter'
   },
 
-  components: true,
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
 
   buildModules:
   [
