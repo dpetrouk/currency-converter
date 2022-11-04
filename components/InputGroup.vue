@@ -75,11 +75,6 @@ export default {
       this.$emit('input', selectedItem);
       this.closeSuggestedList();
     },
-    handleClickOutside(event) {
-      if (!this.$el.contains(event.target)) {
-        this.closeSuggestedList();
-      }
-    },
     onArrowDown() {
       if (this.arrowCounter < this.suggestedList.length - 1) {
         this.arrowCounter = this.arrowCounter + 1;
@@ -120,6 +115,11 @@ export default {
         nextElement.querySelector('input').focus();
       } else {
         currentElement.blur();
+      }
+    },
+    handleClickOutside(event) {
+      if (!this.$refs.input.contains(event.target)) {
+        this.closeSuggestedList();
       }
     }
   },
