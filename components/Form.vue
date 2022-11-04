@@ -23,7 +23,7 @@
           label="Количество"
           placeholder="Введите число"
           type="amount"
-          :items="[1,2,3,4,5,10,15,20,25,50,100]"
+          :items="amountOptions"
           v-model="amountInInitialCurrency"
           @input="onChange"
         />
@@ -45,6 +45,7 @@ export default {
       codeOfFinalCurrency: '',
       amountInInitialCurrency: '',
       amountInFinalCurrency: '',
+      amountOptions: [1,5,10,25,50,100]
     };
   },
   computed: {
