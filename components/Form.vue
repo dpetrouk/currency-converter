@@ -47,7 +47,7 @@ export default {
       codeOfFinalCurrency: '',
       amountInInitialCurrency: '',
       amountInFinalCurrency: '',
-      amountOptions: [1,5,10,25,50,100]
+      amountOptions: [100,50,25,10,5,1]
     };
   },
   computed: {
