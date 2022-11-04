@@ -63,10 +63,11 @@ export default {
       }
     },
     filterResults() {
+      const valueToSearch = (this.value ?? '').toLowerCase();
       this.results = this.items
         .filter((item) => item
           .toLowerCase()
-          .indexOf(this.value.toLowerCase()) > -1
+          .indexOf(valueToSearch) > -1
         );
     },
     setResult(result, i) {
