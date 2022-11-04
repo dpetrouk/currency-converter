@@ -30,7 +30,9 @@
       </div>
       <div :id="$style['result-container']">
         <img :id="$style['info-icon']" src="../assets/images/icon-info-red.svg" />
-        <span :id="$style['result-text']">Итого: {{ amountInFinalCurrency }} {{ codeOfFinalCurrency }}</span>
+        <span :id="$style['result-text']">
+          Итого: {{ result }}
+        </span>
       </div>
     </div>
 </template>
@@ -49,7 +51,21 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['currenciesCodesAndNames', 'currenciesCodes'])
+    ...mapGetters(['currenciesCodesAndNames', 'currenciesCodes']),
+    areFieldsEmpty() {
+      const isField1Empty = this.codeOfInitialCurrency.length > 0;
+      const isField2Empty = this.codeOfFinalCurrency.length > 0;
+      const isAmountEmpty = this.amountInInitialCurrency.length > 0;
+      return isField1Empty && isField2Empty && isAmountEmpty;
+    },
+    result() {
+      if (this.areFieldsEmpty) {
+        const initialCurrency = `${this.amountInInitialCurrency} ${this.codeOfInitialCurrency}`;
+        const finalCurrency = `${this.amountInFinalCurrency} ${this.codeOfFinalCurrency}`;
+        return `${initialCurrency} = ${finalCurrency}`;
+      }
+      return '';
+    }
   },
   methods: {
     getValueOfCurrencyInRUB(currencyCode) {
