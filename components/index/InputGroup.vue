@@ -112,16 +112,18 @@ export default {
       }
     },
     handleClickOutside(event) {
-      if (!this.$refs.input.contains(event.target)) {
+      const inputIsClicked = this.$refs.input.contains(event.target);
+      const optionsAreClicked = this.$refs.input.nextElementSibling.contains(event.target);
+      if (!inputIsClicked && !optionsAreClicked) {
         this.hideOptions();
       }
     }
   },
   mounted() {
-    document.addEventListener('click', this.handleClickOutside);
+    document.addEventListener('mousedown', this.handleClickOutside);
   },
   destroyed() {
-    document.removeEventListener('click', this.handleClickOutside);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   },
 }
 </script>
