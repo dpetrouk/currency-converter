@@ -11,6 +11,7 @@ export const getters = {
     const valueOfCurrencyInRUB = currency.value / currency.nominal;
     return valueOfCurrencyInRUB;
   },
+  hasCurrencyCode: (state) => (value) => !!(state.currencies[value]),
   currenciesCodes(state) {
     const codes = Object.keys(state.currencies);
     return codes;

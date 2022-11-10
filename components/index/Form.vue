@@ -70,7 +70,8 @@ export default {
   },
   methods: {
     getCurrencyCodeFromMixedString(currencyCodeAndName) {
-      return currencyCodeAndName.split(' -')[0];
+      const value = currencyCodeAndName.split(' -')[0];
+      return this.$store.getters.hasCurrencyCode(value) ? value : '';
     },
     getValueOfCurrencyInRUB(currencyCode) {
       return this.$store.getters.getValueOfCurrencyInRUB(currencyCode);
