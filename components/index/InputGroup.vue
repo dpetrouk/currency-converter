@@ -8,10 +8,9 @@
       :value="value"
       ref="input"
       @input="onChange($event.target.value)"
-      @focus="onFocus"
+      @focus="onFocus($event.target.value)"
       @keydown.down="onArrowDown" @keydown.up="onArrowUp"
-      @keydown.enter="onEnter"
-      @keydown.tab="closeSuggestedList"
+      @keydown.enter="onEnter" @keydown.tab="hideOptions"
     />
     <ul
       v-show="isOpen"
@@ -43,30 +42,32 @@ export default {
     };
   },
   methods: {
-    closeSuggestedList() {
+    filterOptions(value) {
+      const valueToSearch = value ? String(value).toLowerCase() : '';
+      return this.options
+        .filter((item) => String(item).toLowerCase().indexOf(valueToSearch) > -1);
+    },
+    setResult(selectedItem) {
+      this.$emit('input', selectedItem);
+      this.hideOptions();
+    },
+    showOptions(value) {
+      this.suggestedList = this.filterOptions(value);
+      this.isOpen = true;
+    },
+    hideOptions() {
       this.isOpen = false;
       this.arrowCounter = -1;
     },
-    onFocus() {
+    onFocus(value) {
       if (this.options) {
-        this.isOpen = true;
-        this.suggestedList = this.options;
+        this.showOptions(value);
       }
     },
     onChange(value) {
       this.$emit('input', value);
 
-      this.filterOptions(value);
-      this.isOpen = true;
-    },
-    filterOptions(value) {
-      const valueToSearch = value ? String(value).toLowerCase() : '';
-      this.suggestedList = this.options
-        .filter((item) => String(item).toLowerCase().indexOf(valueToSearch) > -1);
-    },
-    setResult(selectedItem) {
-      this.$emit('input', selectedItem);
-      this.closeSuggestedList();
+      this.showOptions(value);
     },
     onArrowDown() {
       if (this.arrowCounter < this.suggestedList.length - 1) {
@@ -84,14 +85,14 @@ export default {
       }
       this.scrollToSelectedItem();
     },
-    hasListItemSelected() {
+    hasOptionSelected() {
       return this.arrowCounter >= 0;
     },
     onEnter() {
-      if (this.hasListItemSelected()) {
+      if (this.hasOptionSelected()) {
         this.setResult(this.suggestedList[this.arrowCounter]);
       } else {
-        this.closeSuggestedList();
+        this.hideOptions();
         this.focusNext();
       }
     },
@@ -112,7 +113,7 @@ export default {
     },
     handleClickOutside(event) {
       if (!this.$refs.input.contains(event.target)) {
-        this.closeSuggestedList();
+        this.hideOptions();
       }
     }
   },
