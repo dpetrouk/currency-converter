@@ -2,10 +2,10 @@
   <div>
     <label :class="$style.label">{{ label }}</label>
     <input
-      type="text"
       :class="$style.input"
       :placeholder="placeholder"
       :value="value"
+      :type="type"
       ref="input"
       @input="onChange($event.target.value)"
       @focus="onFocus($event.target.value)"
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  props: ['value', 'options', 'label', 'placeholder'],
+  props: ['value', 'options', 'label', 'placeholder', 'type'],
   data() {
     return {
       suggestedList: [],
